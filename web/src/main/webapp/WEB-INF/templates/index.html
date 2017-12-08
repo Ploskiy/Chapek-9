@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
+
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/index.js"></script>
+
     <title>Chapek-9</title>
 </head>
 <body>
+
+    <div th:insert="~{fragments/nav :: #nav}"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>"Robots only! Humans please enter through meat grinder."</h3>
+            </div>
+        </div>
+
+    </div>
+
+
 
 </body>
 </html>
