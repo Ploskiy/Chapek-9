@@ -2,39 +2,37 @@ package by.ploskiy.controller;
 
 import by.ploskiy.entitys.Task;
 import by.ploskiy.entitys.TaskEnum;
-import by.ploskiy.services.Controller;
+import by.ploskiy.services.TaskController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
 public class IndexRestController {
 
-    private final Task task;
-    private final Controller controller;
+    private final TaskController taskController;
 
 
     @Autowired
-    public IndexRestController(Task task, Controller controller){
-        this.task = task;
-        this.controller = controller;
+    public IndexRestController(TaskController taskController){
+        this.taskController = taskController;
     }
 
     @GetMapping("/controllerTaskList")
     public List<Task> controllerTaskList(){
-        return controller.showTaskList();
+        return taskController.showTaskList();
     }
 
     @PostMapping("/addTaskToController")
-    public void addTask(@RequestBody Task task){
-        System.out.println(task);
-        controller.addTask(task);
+    public void addTask(@RequestBody String dataButton){
+        Task task = new Task();
+        task.setTitle(TaskEnum.valueOf(dataButton.replaceAll("=", "")).getDescription());
+        task.setType(dataButton.replaceAll("=", ""));
+        taskController.addTask(task);
     }
 
     @GetMapping("/allComandsForRobots")

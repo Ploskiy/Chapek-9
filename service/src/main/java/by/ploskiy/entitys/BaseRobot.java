@@ -1,9 +1,6 @@
 package by.ploskiy.entitys;
 
-public abstract class BaseRobot {
+public interface BaseRobot {
 
-    private String name;
-
-    public abstract String walk(String place);
-
+    public abstract void doTask(Task task);
 }

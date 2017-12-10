@@ -7,19 +7,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Service
-public class Controller {
+public class TaskController {
 
     private static List<Task> tasks = new LinkedList<Task>();
 
-    public void addTask(Task task){
+    public synchronized void addTask(Task task){
         tasks.add(task);
     }
 
-    public void removeFirstTask(){
+    public synchronized Task getTask(){
+        Task tmpTask = tasks.get(0);
         tasks.remove(0);
+        return tmpTask;
     }
 
-    public List<Task> showTaskList() {
+    public synchronized List<Task> showTaskList() {
         return tasks;
     }
+
+
 }

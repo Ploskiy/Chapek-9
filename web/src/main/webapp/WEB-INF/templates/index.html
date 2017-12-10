@@ -31,16 +31,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <p id="tasks"></p>
-                <br>
-                <button onclick="controllerTaskList()" type="button" class="btn btn-primary">Primary</button>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="row">
-            <div class="col-md-8">
                 <h4>Tasks for robots:</h4>
                 <div class="btn-group" id="buttonsGroupsComandsForRobots">
 
@@ -53,98 +43,92 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="container-fluid">
                     <h4>Current tasks:</h4>
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td>Default</td>
-                        </tr>
-                        <tr>
-                            <td>Success</td>
-                        </tr>
-                        <tr>
-                            <td>Danger</td>
-                        </tr>
-                        <tr>
-                            <td>Info</td>
-                        </tr>
-                        <tr>
-                            <td>Warning</td>
-                        </tr>
-                        <tr>
-                            <td>Active</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div id="taskTable">
+                        <!-- Generate tasks table -->
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-sm-3">
                 <div class="container-fluid">
                     <h4>Robots:</h4>
+                    <div id="robotsField">
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <h4>Robot - 1</h4>
-
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <td>Default</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Success</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Danger</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Info</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Warning</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Active</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="col-sm-2">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Robot1</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Default</td>
+                                </tr>
+                                <tr>
+                                    <td>Success</td>
+                                </tr>
+                                <tr>
+                                    <td>Danger</td>
+                                </tr>
+                                <tr>
+                                    <td>Info</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <h4>Robot - 2</h4>
-
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <td>Default</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Success</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Danger</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Info</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Warning</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Active</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="col-sm-2 col-sm-offset-2">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Robot2</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Default</td>
+                                </tr>
+                                <tr>
+                                    <td>Success</td>
+                                </tr>
+                                <tr>
+                                    <td>Danger</td>
+                                </tr>
+                                <tr>
+                                    <td>Info</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
+
+                        <div class="col-sm-2 col-sm-offset-4">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Robot3</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Default</td>
+                                </tr>
+                                <tr>
+                                    <td>Success</td>
+                                </tr>
+                                <tr>
+                                    <td>Danger</td>
+                                </tr>
+                                <tr>
+                                    <td>Info</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>

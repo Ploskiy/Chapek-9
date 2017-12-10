@@ -2,20 +2,25 @@ package by.ploskiy.entitys;
 
 public enum TaskEnum {
 
-    HEAD {
+    KILL_ALL_HUMANS {
         @Override
         public String getDescription() {
-            return "Голова";
+            return "Убить всех человеков";
         }
-    }, BODY {
+    }, BUILD {
         @Override
         public String getDescription() {
-            return "Тело";
+            return "Строить";
         }
-    }, LEFT_HAND {
+    }, CALCULATE {
         @Override
         public String getDescription() {
-            return "Левая рука";
+            return "Считать";
+        }
+    }, SELF_DESTRUCTION {
+        @Override
+        public String getDescription() {
+            return "Самоуничтожение";
         }
     };
 
