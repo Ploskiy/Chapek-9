@@ -1,6 +1,9 @@
 package by.ploskiy.entitys;
 
-public class RealRobot extends BaseRobot {
+import org.springframework.stereotype.Component;
+
+@Component
+public class RealRobot implements BaseRobot {
 
     public void doTask(Task task) {
         System.out.println("Получил задание.");
