@@ -1,6 +1,7 @@
 package by.ploskiy.services;
 
 import by.ploskiy.config.TestConfigServices;
+import by.ploskiy.entitys.BaseRobot;
 import by.ploskiy.entitys.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,8 +19,12 @@ public class TestRobots {
     @Autowired
     private Task task;
 
+    @Autowired
+    private FactoryRobots factoryRobots;
+
     @Test
     public void TestRobotsFactory() {
-        System.out.println(task);
+        BaseRobot robot = factoryRobots.getRobot();
+        System.out.println(robot);
     }
 }
