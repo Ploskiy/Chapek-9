@@ -15,6 +15,11 @@ public class SimpleRobot implements BaseRobot, Runnable {
     }
 
     private List<String> robotLog = new ArrayList<String>();
+    private Task task = new Task();
+
+    public void setTaskForRobot(Task task) {
+        this.task = task;
+    }
 
 
     public void doTask(Task task) {
@@ -42,6 +47,10 @@ public class SimpleRobot implements BaseRobot, Runnable {
             wait(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+
+        if (task != null){
+            doTask(task);
         }
 
         robotLog.add("Загрузка процессора");

@@ -41,6 +41,11 @@ public class Tests {
         BaseRobot robot1 = factoryRobots.getRobot();
         SimpleRobot simpleRobot = new SimpleRobot();
 
+        task.setTitle("111");
+        task.setType("222");
+
+        simpleRobot.setTaskForRobot(task);
+
         new Thread(simpleRobot, "robo1").start();
     }
 }
