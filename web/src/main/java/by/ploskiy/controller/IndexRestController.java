@@ -1,7 +1,7 @@
 package by.ploskiy.controller;
 
 import by.ploskiy.entitys.Task;
-import by.ploskiy.entitys.TaskEnum;
+import by.ploskiy.entitys.TaskTypeEnum;
 import by.ploskiy.services.TaskController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,11 @@ import java.util.List;
 @RestController
 public class IndexRestController {
 
-    private final TaskController taskController;
-
-
     @Autowired
+    private final TaskController taskController;
+    private Task task;
+
+
     public IndexRestController(TaskController taskController){
         this.taskController = taskController;
     }
@@ -30,13 +31,13 @@ public class IndexRestController {
     @PostMapping("/addTaskToController")
     public void addTask(@RequestBody String dataButton){
         Task task = new Task();
-        task.setTitle(TaskEnum.valueOf(dataButton.replaceAll("=", "")).getDescription());
+        task.setTitle(TaskTypeEnum.valueOf(dataButton.replaceAll("=", "")).getDescription());
         task.setType(dataButton.replaceAll("=", ""));
         taskController.addTask(task);
     }
 
     @GetMapping("/allComandsForRobots")
-    public TaskEnum[] allComandsForRobots() {
-        return TaskEnum.values();
+    public TaskTypeEnum[] allComandsForRobots() {
+        return TaskTypeEnum.values();
     }
 }

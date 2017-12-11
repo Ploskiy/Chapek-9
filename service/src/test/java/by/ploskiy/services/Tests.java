@@ -2,7 +2,9 @@ package by.ploskiy.services;
 
 import by.ploskiy.config.TestConfigServices;
 import by.ploskiy.entitys.BaseRobot;
+import by.ploskiy.entitys.SimpleRobot;
 import by.ploskiy.entitys.Task;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +16,31 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestConfigServices.class)
-public class TestRobots {
+public class Tests {
 
-    @Autowired
-    private Task task;
+//    private final Task task;
 
     @Autowired
     private FactoryRobots factoryRobots;
 
+    @Autowired
+    private Task task;
+
+
     @Test
-    public void TestRobotsFactory() {
+    public void RobotsFactoryTest() {
         BaseRobot robot = factoryRobots.getRobot();
-        System.out.println(robot);
+        BaseRobot robot1 = factoryRobots.getRobot();
+
+        Assert.assertNotEquals(robot, robot1);
+    }
+
+    @Test
+    public void threadRobotsTest() {
+        BaseRobot robot = factoryRobots.getRobot();
+        BaseRobot robot1 = factoryRobots.getRobot();
+        SimpleRobot simpleRobot = new SimpleRobot();
+
+        new Thread(simpleRobot, "robo1").start();
     }
 }

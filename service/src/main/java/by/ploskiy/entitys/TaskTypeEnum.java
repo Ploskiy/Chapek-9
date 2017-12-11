@@ -1,6 +1,6 @@
 package by.ploskiy.entitys;
 
-public enum TaskEnum {
+public enum TaskTypeEnum {
 
     KILL_ALL_HUMANS {
         @Override
