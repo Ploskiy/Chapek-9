@@ -14,6 +14,7 @@ public class SimpleRobot implements BaseRobot, Runnable {
     public SimpleRobot() {
     }
 
+    private static int count = 0;
     private List<String> robotLog = new ArrayList<String>();
     private Task task = new Task();
 
@@ -35,6 +36,8 @@ public class SimpleRobot implements BaseRobot, Runnable {
             loadProcess();
             robotLog.add("Закончил задание.");
             showLog();
+
+            System.out.println(count + "*******************************************");
         }
 
     }
@@ -52,6 +55,7 @@ public class SimpleRobot implements BaseRobot, Runnable {
 
     public void loadProcess(){
         StringBuilder stringBuilder = new StringBuilder("");
+        count++;
 
         for (int i = 0; i <= 10; i++){
             for (int l = 0; l < i; l++) {

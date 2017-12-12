@@ -51,20 +51,25 @@ public class Tests {
         simpleRobot.setTaskForRobot(task1);
         simpleRobot2.setTaskForRobot(task2);
 
-        Thread t1 = new Thread(simpleRobot, "robo1");
-        Thread t2 = new Thread(simpleRobot2, "robo2");
+        List<SimpleRobot> robotsList = new ArrayList<SimpleRobot>();
+        robotsList.add(simpleRobot);
+        robotsList.add(simpleRobot2);
 
-        List<Thread> listThreads = new ArrayList<Thread>();
-        listThreads.add(t1);
-        listThreads.add(t2);
+        Thread t1 = new Thread(robotsList.get(0), "robo1");
+        Thread t2 = new Thread(robotsList.get(1), "robo2");
 
-        listThreads.get(0).start();
-        System.out.println(listThreads.size());
-        listThreads.get(1).start();
+        t1.start();
+        t2.start();
 
+        Thread t3 = new Thread(robotsList.get(0), "robo1");
+        t3.start();
 
+//        try {
+//            wait(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        robotsList.get(0).showLog();
         System.out.println("Поток отработал");
-
-        System.out.println(listThreads.size());
     }
 }
