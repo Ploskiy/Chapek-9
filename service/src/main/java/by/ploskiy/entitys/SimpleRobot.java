@@ -33,8 +33,8 @@ public class SimpleRobot implements BaseRobot, Runnable {
             robotLog.add("Делаю..." );
             showLog();
             loadProcess();
-            showLog();
             robotLog.add("Закончил задание.");
+            showLog();
         }
 
     }
@@ -43,23 +43,11 @@ public class SimpleRobot implements BaseRobot, Runnable {
         System.out.printf("Поток %s начал работу... \n", Thread.currentThread().getName());
         robotLog.add("Питание подано");
 
-        try {
-            wait(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         if (task != null){
             doTask(task);
         }
 
         robotLog.add("Загрузка процессора");
-
-        try {
-            wait(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public void loadProcess(){
@@ -71,11 +59,11 @@ public class SimpleRobot implements BaseRobot, Runnable {
             }
             stringBuilder.append("" + i * 10 + "%");
 
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                TimeUnit.SECONDS.sleep(1);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
             robotLog.add(stringBuilder.toString());
             showLog();

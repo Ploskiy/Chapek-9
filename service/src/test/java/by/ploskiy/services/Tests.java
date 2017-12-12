@@ -14,6 +14,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestConfigServices.class)
 public class Tests {
@@ -40,12 +43,28 @@ public class Tests {
         BaseRobot robot = factoryRobots.getRobot();
         BaseRobot robot1 = factoryRobots.getRobot();
         SimpleRobot simpleRobot = new SimpleRobot();
+        SimpleRobot simpleRobot2 = new SimpleRobot();
 
-        task.setTitle("111");
-        task.setType("222");
+        Task task1 = new Task("111", "222");
+        Task task2 = new Task("333", "444");
 
-        simpleRobot.setTaskForRobot(task);
+        simpleRobot.setTaskForRobot(task1);
+        simpleRobot2.setTaskForRobot(task2);
 
-        new Thread(simpleRobot, "robo1").start();
+        Thread t1 = new Thread(simpleRobot, "robo1");
+        Thread t2 = new Thread(simpleRobot2, "robo2");
+
+        List<Thread> listThreads = new ArrayList<Thread>();
+        listThreads.add(t1);
+        listThreads.add(t2);
+
+        listThreads.get(0).start();
+        System.out.println(listThreads.size());
+        listThreads.get(1).start();
+
+
+        System.out.println("Поток отработал");
+
+        System.out.println(listThreads.size());
     }
 }
