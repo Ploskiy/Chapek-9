@@ -2,6 +2,7 @@ package by.ploskiy.services;
 
 import by.ploskiy.entitys.BaseRobot;
 import by.ploskiy.entitys.SimpleRobot;
+import by.ploskiy.entitys.StrongRobot;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -10,22 +11,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Component
-@Scope("singleton")
+import java.util.Random;
+
+@Service
 public class FactoryRobots {
-
-
-//    private FactoryRobots() {
-//    }
-//
-//    private static FactoryRobots instance;
-//
-//    public static FactoryRobots getInstans() {
-//        if(instance == null){
-//            instance = new FactoryRobots();
-//        }
-//        return instance;
-//    }
 
     public BaseRobot getRobot(){
         BaseRobot robot = new SimpleRobot();

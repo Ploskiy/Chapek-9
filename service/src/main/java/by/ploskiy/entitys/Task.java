@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 @NoArgsConstructor
 @ToString
 @Repository
-@Scope("prototype")
 public class Task {
 
     private String title;

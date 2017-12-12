@@ -15,6 +15,7 @@
 
     <script>
         controllerTaskList();
+        controllerLogList();
         buttonsGroupsComandsForRobots();
     </script>
 
@@ -52,83 +53,11 @@
                 </div>
             </div>
 
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="container-fluid">
-                    <h4>Robots:</h4>
-                    <div id="robotsField">
-
-                        <div class="col-sm-2">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Robot1</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Default</td>
-                                </tr>
-                                <tr>
-                                    <td>Success</td>
-                                </tr>
-                                <tr>
-                                    <td>Danger</td>
-                                </tr>
-                                <tr>
-                                    <td>Info</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="col-sm-2 col-sm-offset-2">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Robot2</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Default</td>
-                                </tr>
-                                <tr>
-                                    <td>Success</td>
-                                </tr>
-                                <tr>
-                                    <td>Danger</td>
-                                </tr>
-                                <tr>
-                                    <td>Info</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="col-sm-2 col-sm-offset-4">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Robot3</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Default</td>
-                                </tr>
-                                <tr>
-                                    <td>Success</td>
-                                </tr>
-                                <tr>
-                                    <td>Danger</td>
-                                </tr>
-                                <tr>
-                                    <td>Info</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
+                    <h4>Current Logs:</h4>
+                    <div id="LogTable">
+                        <!-- Generate logs table -->
                     </div>
                 </div>
             </div>

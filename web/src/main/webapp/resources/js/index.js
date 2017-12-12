@@ -14,9 +14,30 @@ function controllerTaskList() {
         div.innerHTML = table;
 
         console.log(response);
-    })
+    });
 
     setTimeout(controllerTaskList, 5000);
+}
+
+function controllerLogList() {
+    $.ajax("/controllerLogList", {
+        method: "GET"
+    }).done(function (response) {
+        var table = "<table>" + "\n" + "<tbody>";
+
+        for (var i = 0; i < response.length; i++){
+            table +=  "<tr>" + "\n";
+            table +=  "<th>" + response[i] + "</th>" + "\n";
+            table += "</tr>" + "\n";
+        }
+        table += "</tbody>"  + "\n" + "</table>";
+        var div = document.querySelector('#LogTable');
+        div.innerHTML = table;
+
+        console.log(response);
+    });
+
+    setTimeout(controllerLogList, 5000);
 }
 
 function addTaskToController(data) {

@@ -69,7 +69,19 @@ public class Tests {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        robotsList.get(0).showLog();
+
         System.out.println("Поток отработал");
+    }
+
+    @Test
+    public void testList() {
+        List<String> test = new ArrayList<String>();
+
+        test.add("1");
+        test.add("2");
+        test.add("3");
+        test.add("4");
+
+        System.out.println(test.get(0));
     }
 }

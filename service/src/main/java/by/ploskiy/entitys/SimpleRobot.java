@@ -1,6 +1,8 @@
 package by.ploskiy.entitys;
 
+import by.ploskiy.services.LogController;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,12 +11,14 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @ToString
-public class SimpleRobot implements BaseRobot, Runnable {
+public class SimpleRobot extends BaseRobot {
 
     public SimpleRobot() {
     }
 
-    private static int count = 0;
+    @Autowired
+    private LogController logController;
+
     private List<String> robotLog = new ArrayList<String>();
     private Task task = new Task();
 
@@ -23,21 +27,15 @@ public class SimpleRobot implements BaseRobot, Runnable {
     }
 
 
-    public void doTask(Task task) {
+    public void doTask() {
         if(task.getType().equals(TaskTypeEnum.SELF_DESTRUCTION)) {
             robotLog.add("Получил задание:" + task.getTitle());
             robotLog.add("Самоуничтожение..." );
         } else {
-            showLog();
             robotLog.add("Получил задание:" + task.getTitle());
-            showLog();
             robotLog.add("Делаю..." );
-            showLog();
             loadProcess();
             robotLog.add("Закончил задание.");
-            showLog();
-
-            System.out.println(count + "*******************************************");
         }
 
     }
@@ -45,17 +43,21 @@ public class SimpleRobot implements BaseRobot, Runnable {
     public void run() {
         System.out.printf("Поток %s начал работу... \n", Thread.currentThread().getName());
         robotLog.add("Питание подано");
+        robotLog.add("Загрузка процессора");
 
         if (task != null){
-            doTask(task);
+            doTask();
+            loadRobotLogToGlobalLog();
+            task = null;
         }
+    }
 
-        robotLog.add("Загрузка процессора");
+    public void loadRobotLogToGlobalLog() {
+        logController.addListtoLog(robotLog);
     }
 
     public void loadProcess(){
         StringBuilder stringBuilder = new StringBuilder("");
-        count++;
 
         for (int i = 0; i <= 10; i++){
             for (int l = 0; l < i; l++) {
@@ -63,22 +65,24 @@ public class SimpleRobot implements BaseRobot, Runnable {
             }
             stringBuilder.append("" + i * 10 + "%");
 
-//            try {
-//                TimeUnit.SECONDS.sleep(1);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-
+            robotLog.remove(robotLog.size()-1);
             robotLog.add(stringBuilder.toString());
-            showLog();
             stringBuilder.setLength(0);
+            System.out.println("-=1=-");
         }
     }
 
-    public void showLog() {
-        for (String s : robotLog ) {
-            System.out.println(s);
+    public boolean isBusy(){
+        if(task != null) {
+            return true;
         }
-        System.out.println("-=-=---=-=-=");
+        return false;
     }
+
+//    public void showLog() {
+//        for (String s : robotLog ) {
+//            System.out.println(s);
+//        }
+//        System.out.println("-=-=---=-=-=");
+//    }
 }
