@@ -26,6 +26,12 @@ public abstract class BaseRobot implements Runnable {
         robotLog.remove(robotLog.size() - 1);
     }
 
+    public void robotLogClearAll() {
+        while (robotLog.size() > 0){
+            robotLog.remove(0);
+        }
+    }
+
     @Getter
     @Setter
     private String name;

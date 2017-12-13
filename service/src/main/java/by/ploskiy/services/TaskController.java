@@ -48,15 +48,23 @@ public class TaskController {
             }
 
             for (BaseRobot aRobotsList : robotsList) {
-                logController.addListToLog(aRobotsList.getRobotLog());
-
                 if (aRobotsList.isFree()) {
                     aRobotsList.setTask(getTask());
                     executorService.submit(aRobotsList);
                 }
+
+                try {
+                    wait(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                logController.addListToLog(aRobotsList.getRobotLog());
+                logController.addStringToLog("¯\\_(ツ)_/¯ ¯\\_(ツ)_/¯ ¯\\_(ツ)_/¯");
             }
             return taskLinkedList;
         }
+
         return taskLinkedList;
     }
 }

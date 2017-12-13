@@ -1,19 +1,25 @@
 package by.ploskiy.entitys;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SimpleRobot extends BaseRobot {
 
     public void doTask() {
-        if(getTask().getType().equals(TaskTypeEnum.SELF_DESTRUCTION)) {
-            addRobotLogString(getName() + "получил задание:" + getTask().getTitle());
-            addRobotLogString("Самоуничтожение..." );
+        if(getTask().getType().equals(TaskTypeEnum.SELF_DESTRUCTION.toString())) {
+            robotLogClearAll();
+            addRobotLogString(getName() + " получил задание: " + getTask().getTitle() + ".\n"
+                    + " 3 - 2 - 1 " + "\n"
+                    + "Самоуничтожение... " + '\u2737');
+        } else if (getTask().getType().equals(TaskTypeEnum.KILL_ALL_HUMANS.toString())) {
+            robotLogClearAll();
+            addRobotLogString(getName() + " получил задание: " + getTask().getTitle() + ".\n"
+                    + "Ура! Охота на человеков!" + "\n"
+                    + "Поиск человеков..." + "\n"
+                    + "Простой робот провалил задание");
         } else {
-            addRobotLogString(getName() + " получил задание:" + getTask().getTitle());
-            addRobotLogString("Делаю..." );
-            loadProcess();
-            addRobotLogString("Закончил задание.");
+            robotLogClearAll();
+            addRobotLogString(getName() + " получил задание: " + getTask().getTitle() + ".\n"
+                    + "Делаю..." + "\n"
+                    + "[==========] 100%" + "\n"
+                    + "Закончил задание.");
         }
     }
 
@@ -28,7 +34,7 @@ public class SimpleRobot extends BaseRobot {
 //        System.out.printf("Поток %s закончил работу... \n", Thread.currentThread().getName());
     }
 
-    private void loadProcess(){
+    private String loadProcess(){
         StringBuilder stringBuilder = new StringBuilder("");
 
         for (int i = 0; i <= 10; i++){
@@ -38,8 +44,10 @@ public class SimpleRobot extends BaseRobot {
             stringBuilder.append("").append(i * 10).append("%");
 
             robotLogRemoveLastString();
-            addRobotLogString(stringBuilder.toString());
+//            addRobotLogString(stringBuilder.toString());
             stringBuilder.setLength(0);
         }
+
+        return stringBuilder.toString();
     }
 }
