@@ -8,15 +8,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestConfigServices.class)
@@ -49,8 +48,8 @@ public class Tests {
         Task task1 = new Task("111", "222");
         Task task2 = new Task("333", "444");
 
-        simpleRobot.setTaskForRobot(task1);
-        simpleRobot2.setTaskForRobot(task2);
+        simpleRobot.setTask(task1);
+        simpleRobot2.setTask(task2);
 
         List<SimpleRobot> robotsList = new ArrayList<SimpleRobot>();
         robotsList.add(simpleRobot);
@@ -75,20 +74,25 @@ public class Tests {
     }
 
     @Test
-    public void testList() {
-        List<String> test = new LinkedList<String>();
-        List<String> test2 = new ArrayList<String>();
+    public void testRobotsTaskLog() {
+        List<BaseRobot> robotsList = new ArrayList<BaseRobot>();
+        robotsList.add(factoryRobots.getRobot());
+        robotsList.add(factoryRobots.getRobot());
+
+        Task task = new Task("111", "111");
+        Task task2 = new Task("222", "222");
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+
+        robotsList.get(0).setTask(task);
+        robotsList.get(1).setTask(task2);
+
+        executorService.submit(robotsList.get(0));
+        executorService.submit(robotsList.get(1));
 
 
 
-        test2.add("1");
-        test2.add("2");
-        test.add("3");
-        test.add("4");
+        System.out.println(robotsList.get(0).getRobotLog());
 
-        test.addAll(test2);
-
-
-        System.out.println(test);
     }
 }

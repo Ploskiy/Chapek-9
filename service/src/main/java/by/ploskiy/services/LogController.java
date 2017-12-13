@@ -1,9 +1,7 @@
 package by.ploskiy.services;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 

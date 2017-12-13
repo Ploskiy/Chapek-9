@@ -53,10 +53,12 @@ public class TaskController {
             }
 
             for (BaseRobot aRobotsList : robotsList) {
+                System.out.println("log " + aRobotsList.getName() + ": " + aRobotsList.getRobotLog());
+
                 logController.addListToLog(aRobotsList.getRobotLog());
 
                 if (aRobotsList.isFree()) {
-                    aRobotsList.setTaskForRobot(getTask());
+                    aRobotsList.setTask(getTask());
                     executorService.submit(aRobotsList);
                 }
             }

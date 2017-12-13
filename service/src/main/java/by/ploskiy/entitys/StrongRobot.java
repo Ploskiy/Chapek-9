@@ -1,7 +1,5 @@
 package by.ploskiy.entitys;
 
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 public class StrongRobot extends BaseRobot {
@@ -16,13 +14,13 @@ public class StrongRobot extends BaseRobot {
         return false;
     }
 
-    public void setTaskForRobot(Task task) {
+    public void setTask(Task task) {
 
     }
 
-    public List<String> getRobotLog() {
-        return null;
-    }
+//    public List<String> getRobotLog() {
+//        return null;
+//    }
 
     public void run() {
 
