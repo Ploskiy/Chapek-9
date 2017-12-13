@@ -16,8 +16,11 @@ import java.util.Random;
 @Service
 public class FactoryRobots {
 
+    private long count = 0;
+
     public BaseRobot getRobot(){
         BaseRobot robot = new SimpleRobot();
+        robot.setName(robot.getClass().getSimpleName() + count++);
         return robot;
     }
 }

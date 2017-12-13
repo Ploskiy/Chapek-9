@@ -2,8 +2,9 @@ package by.ploskiy.entitys;
 
 import org.springframework.stereotype.Component;
 
-@Component
-public class RealRobot extends BaseRobot {
+import java.util.List;
+
+public class ManInRobotCostume extends BaseRobot {
 
     public void doTask() {
         System.out.println("Получил задание.");
@@ -11,12 +12,16 @@ public class RealRobot extends BaseRobot {
         System.out.println("Закончил.");
     }
 
-    public boolean isBusy() {
+    public boolean isFree() {
         return false;
     }
 
     public void setTaskForRobot(Task task) {
 
+    }
+
+    public List<String> getRobotLog() {
+        return null;
     }
 
     public void run() {

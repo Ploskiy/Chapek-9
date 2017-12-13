@@ -1,24 +1,26 @@
 package by.ploskiy.services;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
 public class LogController {
 
-    private static List<String> log = new ArrayList<String>();
+    private static List<String> log = new LinkedList<String>();
 
-    public void addStringToLog(String event){
+    public synchronized void addStringToLog(String event){
         log.add(event);
     }
 
-    public void addListtoLog(List<String> eventsList){
+    public synchronized void addListToLog(List<String> eventsList){
         log.addAll(eventsList);
     }
 
-    public List<String> getAllLogList() {
+    public synchronized List<String> getAllLogList() {
         while (log.size() > 10){
             log.remove(0);
         }

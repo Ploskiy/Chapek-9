@@ -7,53 +7,42 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-@Component
-@ToString
 public class SimpleRobot extends BaseRobot {
 
-    public SimpleRobot() {
-    }
-
-    @Autowired
-    private LogController logController;
-
-    private List<String> robotLog = new ArrayList<String>();
-    private Task task = new Task();
+    private static List<String> robotLog = new ArrayList<String>();
+    private Task task = null;
 
     public void setTaskForRobot(Task task) {
         this.task = task;
     }
 
-
     public void doTask() {
         if(task.getType().equals(TaskTypeEnum.SELF_DESTRUCTION)) {
-            robotLog.add("Получил задание:" + task.getTitle());
+            robotLog.add(getName() + "получил задание:" + task.getTitle());
             robotLog.add("Самоуничтожение..." );
         } else {
-            robotLog.add("Получил задание:" + task.getTitle());
+            robotLog.add(getName() + " получил задание:" + task.getTitle());
             robotLog.add("Делаю..." );
             loadProcess();
             robotLog.add("Закончил задание.");
         }
-
     }
 
     public void run() {
         System.out.printf("Поток %s начал работу... \n", Thread.currentThread().getName());
-        robotLog.add("Питание подано");
-        robotLog.add("Загрузка процессора");
 
         if (task != null){
+            System.out.printf("2 Поток %s начал работу... \n", Thread.currentThread().getName());
             doTask();
-            loadRobotLogToGlobalLog();
+            System.out.println(robotLog);
             task = null;
         }
+        System.out.printf("Поток %s закончил работу... \n", Thread.currentThread().getName());
     }
 
-    public void loadRobotLogToGlobalLog() {
-        logController.addListtoLog(robotLog);
+    public List<String> getRobotLog() {
+        return robotLog;
     }
 
     public void loadProcess(){
@@ -68,15 +57,12 @@ public class SimpleRobot extends BaseRobot {
             robotLog.remove(robotLog.size()-1);
             robotLog.add(stringBuilder.toString());
             stringBuilder.setLength(0);
-            System.out.println("-=1=-");
         }
     }
 
-    public boolean isBusy(){
-        if(task != null) {
-            return true;
-        }
-        return false;
+    public boolean isFree(){
+        System.out.println(task);
+        return task == null;
     }
 
 //    public void showLog() {

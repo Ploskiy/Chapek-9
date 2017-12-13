@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -75,13 +76,19 @@ public class Tests {
 
     @Test
     public void testList() {
-        List<String> test = new ArrayList<String>();
+        List<String> test = new LinkedList<String>();
+        List<String> test2 = new ArrayList<String>();
 
-        test.add("1");
-        test.add("2");
+
+
+        test2.add("1");
+        test2.add("2");
         test.add("3");
         test.add("4");
 
-        System.out.println(test.get(0));
+        test.addAll(test2);
+
+
+        System.out.println(test);
     }
 }
