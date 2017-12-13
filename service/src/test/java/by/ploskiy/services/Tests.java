@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestConfigServices.class)
 public class Tests {
@@ -64,12 +66,6 @@ public class Tests {
         Thread t3 = new Thread(robotsList.get(0), "robo1");
         t3.start();
 
-//        try {
-//            wait(10);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
         System.out.println("Поток отработал");
     }
 
@@ -91,8 +87,8 @@ public class Tests {
         executorService.submit(robotsList.get(1));
 
 
+        System.out.println(robotsList.get(0).getRobotLog().size());
 
-        System.out.println(robotsList.get(0).getRobotLog());
-
+        assertEquals(robotsList.get(0).getRobotLog().size(), 1);
     }
 }

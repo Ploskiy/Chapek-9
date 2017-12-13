@@ -18,10 +18,6 @@ public class StrongRobot extends BaseRobot {
 
     }
 
-//    public List<String> getRobotLog() {
-//        return null;
-//    }
-
     public void run() {
 
     }

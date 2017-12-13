@@ -6,9 +6,6 @@ import java.util.Random;
 
 public class ManInRobotCostume extends BaseRobot {
 
-//    private static List<String> robotLog = new ArrayList<String>();
-
-
     public void doTask() {
         if(getTask().getType().equals(TaskTypeEnum.SELF_DESTRUCTION)) {
             addRobotLogString(getName() + "получил задание:" + getTask().getTitle());
@@ -34,10 +31,6 @@ public class ManInRobotCostume extends BaseRobot {
     public boolean isFree() {
         return false;
     }
-
-//    public List<String> getRobotLog() {
-//        return null;
-//    }
 
     public void run() {
 

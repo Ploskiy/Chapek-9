@@ -41,20 +41,13 @@ public class TaskController {
     }
 
     public synchronized List<Task> showTaskList() {
-//        System.out.println("-=-=-=-=--=-=-=-");
-//        System.out.println("taskLinkedList.size " + taskLinkedList.size());
-//        System.out.println("robotsList.size " + robotsList.size());
-
         if(taskLinkedList.size() > 0) {
-//            System.out.println("--===if--==");
 
             if (taskLinkedList.size() > (robotsList.size() / 2)){
                 robotCreator();
             }
 
             for (BaseRobot aRobotsList : robotsList) {
-                System.out.println("log " + aRobotsList.getName() + ": " + aRobotsList.getRobotLog());
-
                 logController.addListToLog(aRobotsList.getRobotLog());
 
                 if (aRobotsList.isFree()) {
@@ -62,10 +55,8 @@ public class TaskController {
                     executorService.submit(aRobotsList);
                 }
             }
-
             return taskLinkedList;
         }
-
         return taskLinkedList;
     }
 }
