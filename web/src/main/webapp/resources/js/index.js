@@ -2,7 +2,7 @@ function controllerTaskList() {
     $.ajax("/controllerTaskList", {
         method: "GET"
     }).done(function (response) {
-        var table = "<table>" + "\n" + "<tbody>";
+        var table = "<table class=\"table table-striped\">" + "\n" + "<tbody>";
 
         for (var i = 0; i < response.length; i++){
             table +=  "<tr>" + "\n";
@@ -19,11 +19,46 @@ function controllerTaskList() {
     setTimeout(controllerTaskList, 5000);
 }
 
+function controllerRobotsList() {
+    $.ajax("/allRobots", {
+        method: "GET"
+    }).done(function (response) {
+        var robotTable = "<table class=\"table table-striped\">" + "\n" + "<tbody>";
+
+        for (var i = 0; i < response.length; i++){
+            var typeRobot = response[i].name.replace(/[0-9]/, "");
+            var task = response[i].task == null ? "-" : response[i].task.title;
+
+            robotTable +=  "<tr>" + "\n";
+            // robotTable +=  "<th>" + response[i].name + "</th>" + "\n";
+            robotTable +=  "<th>" + "<img src=\"/resources/img/"
+                + typeRobot
+                + ".jpg\" class=\"img-rounded\" alt=\"Cinque Terre\">" + "</th>" + "\n";
+            robotTable +=  "<th>" + response[i].free + "</th>" + "\n";
+            robotTable +=  "<th>" + task + "</th>" + "\n";
+            robotTable +=  "<th>" + response[i].robotLog[0] + "</th>" + "\n";
+            robotTable += "</tr>" + "\n";
+        }
+
+        robotTable += "</tbody>"  + "\n" + "</table>";
+
+        var roboDiv = document.querySelector('#numberOfRobots');
+        roboDiv.innerHTML = robotTable;
+
+        var roboCountDiv = document.querySelector('#robotCount');
+        roboCountDiv.innerHTML = "Robots: " + response.length;
+
+        console.log(response);
+    });
+
+    setTimeout(controllerRobotsList, 5000);
+}
+
 function controllerLogList() {
     $.ajax("/controllerLogList", {
         method: "GET"
     }).done(function (response) {
-        var table = "<table>" + "\n" + "<tbody>";
+        var table = "<table class=\"table table-striped\">" + "\n" + "<tbody>";
 
         for (var i = 0; i < response.length; i++){
             table +=  "<tr>" + "\n";

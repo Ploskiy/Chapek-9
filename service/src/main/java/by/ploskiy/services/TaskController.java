@@ -1,6 +1,7 @@
 package by.ploskiy.services;
 
 import by.ploskiy.entitys.BaseRobot;
+import by.ploskiy.entitys.ManInRobotCostume;
 import by.ploskiy.entitys.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,18 @@ public class TaskController {
     private static List<BaseRobot> robotsList = new ArrayList<BaseRobot>();
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
+
+    public boolean findHuman() {
+        for (BaseRobot aRobotsList : robotsList) {
+            if(aRobotsList.getClass() == ManInRobotCostume.class) {
+                robotsList.remove(aRobotsList);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public synchronized void addTask(Task task){
         logController.addStringToLog("Была добавлена задача: " + task.getTitle());
         taskLinkedList.add(task);
@@ -41,30 +54,59 @@ public class TaskController {
     }
 
     public synchronized List<Task> showTaskList() {
-        if(taskLinkedList.size() > 0) {
+        int count = 0;
 
-            if (taskLinkedList.size() > (robotsList.size() / 2)){
-                robotCreator();
-            }
-
-            for (BaseRobot aRobotsList : robotsList) {
-                if (aRobotsList.isFree()) {
-                    aRobotsList.setTask(getTask());
-                    executorService.submit(aRobotsList);
-                }
-
-                try {
-                    wait(5);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                logController.addListToLog(aRobotsList.getRobotLog());
-                logController.addStringToLog("¯\\_(ツ)_/¯ ¯\\_(ツ)_/¯ ¯\\_(ツ)_/¯");
-            }
-            return taskLinkedList;
+        if(taskLinkedList.size() > 0 && count % 3 == 0) {
+            taskControllerHub();
         }
 
+        count++;
         return taskLinkedList;
+    }
+
+    private void taskControllerHub() {
+        if (taskLinkedList.size() > (robotsList.size() / 2)){
+            robotCreator();
+        }
+
+        for (BaseRobot aRobotsList : robotsList) {
+            if (aRobotsList.isFree()) {
+                aRobotsList.setTask(getTask());
+
+                try {
+                    executorService.submit(aRobotsList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            try {
+                wait(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            logController.addListToLog(aRobotsList.getRobotLog());
+            logController.addStringToLog("¯\\_(ツ)_/¯ ¯\\_(ツ)_/¯ ¯\\_(ツ)_/¯");
+        }
+    }
+
+    public void removeRobotInList(String robotName) {
+
+        System.out.println(robotName + "<==========================================");
+
+        for (int i = 0; i < robotsList.size() - 1; i++) {
+            if(robotsList.get(i).getName().equals(robotName)) {
+                System.out.println("-=1=- " + robotsList.get(i).getName() + " - " + robotName);
+
+                robotsList.remove(i);
+
+                System.out.println("-=2=- " + robotsList.get(i).getName() + " - " + robotName);
+            }
+        }
+    }
+
+    public List<BaseRobot> getRobotList() {
+        return robotsList;
     }
 }

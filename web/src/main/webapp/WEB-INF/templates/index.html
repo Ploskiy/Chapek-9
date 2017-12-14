@@ -17,6 +17,7 @@
         controllerTaskList();
         controllerLogList();
         buttonsGroupsComandsForRobots();
+        controllerRobotsList()
     </script>
 
     <div th:insert="~{fragments/nav :: #nav}"></div>
@@ -27,6 +28,8 @@
                 <h3>"Robots only! Humans please enter through meat grinder."</h3>
             </div>
         </div>
+
+        <!--<p id="numberOfRobots"></p>-->
     </div>
 
     <div class="container">
@@ -44,7 +47,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <div class="container-fluid">
                     <h4>Current tasks:</h4>
                     <div id="taskTable">
@@ -58,6 +61,15 @@
                     <h4>Current Logs:</h4>
                     <div id="LogTable">
                         <!-- Generate logs table -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="container-fluid">
+                    <h4 id="robotCount"></h4>
+                    <div id="numberOfRobots">
+                        <!-- Generate robots table -->
                     </div>
                 </div>
             </div>

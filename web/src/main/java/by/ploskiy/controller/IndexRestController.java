@@ -1,5 +1,6 @@
 package by.ploskiy.controller;
 
+import by.ploskiy.entitys.BaseRobot;
 import by.ploskiy.entitys.Task;
 import by.ploskiy.entitys.TaskTypeEnum;
 import by.ploskiy.services.LogController;
@@ -50,5 +51,10 @@ public class IndexRestController {
     @GetMapping("/allComandsForRobots")
     public TaskTypeEnum[] allComandsForRobots() {
         return TaskTypeEnum.values();
+    }
+
+    @GetMapping("/allRobots")
+    public List<BaseRobot> allRobots() {
+        return taskController.getRobotList();
     }
 }

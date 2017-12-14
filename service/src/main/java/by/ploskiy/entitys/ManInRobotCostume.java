@@ -1,5 +1,7 @@
 package by.ploskiy.entitys;
 
+import by.ploskiy.services.TaskController;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,31 +10,27 @@ public class ManInRobotCostume extends BaseRobot {
 
     public void doTask() {
         if(getTask().getType().equals(TaskTypeEnum.SELF_DESTRUCTION)) {
-            addRobotLogString(getName() + "получил задание:" + getTask().getTitle());
+            robotLogClearAll();
 
-            switch (new Random().nextInt(5)){
-                case 1 : addRobotLogString("Нужно где то спрятаться ..." );
+            switch (new Random().nextInt(3)){
+                case 0 : addRobotLogString(getName() + "получил задание:" + getTask().getTitle() + "\n" + "Нужно где то спрятаться ...");
                     break;
-                case 2 : addRobotLogString("Маскируемся деревом ... " );
+                case 1 : addRobotLogString(getName() + "получил задание:" + getTask().getTitle() + "\n" + "Маскируемся деревом ... " );
                     break;
-                case 3 : addRobotLogString("Притварюсь что задача закончилась ошибкой ..." );
+                case 2 : addRobotLogString(getName() + "получил задание:" + getTask().getTitle() + "\n" + "Смотрите! Человеки!" );
                     break;
-                default: addRobotLogString("Паника ... Началась охота на \"Человеков\"" );
+                default: addRobotLogString(getName() + "получил задание:" + getTask().getTitle() + "\n" + "Паника ... Началась охота на \"Человеков\"" );
             }
 
+            getTaskController().removeRobotInList(getName());
+
         } else {
-            addRobotLogString(getName() + " получил задание:" + getTask().getTitle());
-            addRobotLogString("Нужно притвориться, что я делаю работу" );
-            addRobotLogString("Пик, ПИК, пик. Что это вообще за задание такое?" );
-            addRobotLogString("Закончил задание.");
+            robotLogClearAll();
+            addRobotLogString(getName() + " получил задание:" + getTask().getTitle() + "\n"
+                + "Нужно притвориться, что я делаю работу" + "\n"
+                + "Пик, ПИК, пик. Что это вообще за задание такое?" + "\n"
+                + "Закончил задание.");
+
         }
-    }
-
-    public boolean isFree() {
-        return false;
-    }
-
-    public void run() {
-
     }
 }

@@ -1,9 +1,11 @@
 package by.ploskiy.entitys;
 
+import by.ploskiy.services.TaskController;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,7 +16,11 @@ import java.util.List;
 @ToString
 public abstract class BaseRobot implements Runnable {
 
-//    @Setter
+    @Getter
+    @Setter
+    @Autowired
+    private TaskController taskController;
+
     @Getter
     private List<String> robotLog = new ArrayList<String>();
 
@@ -40,20 +46,17 @@ public abstract class BaseRobot implements Runnable {
     @Setter
     private Task task = null;
 
-
-//    public abstract void setTask(Task task);
+    public void run() {
+        if (getTask() != null){
+            doTask();
+            System.out.println(getRobotLog());
+            setTask(null);
+        }
+    }
 
     public abstract void doTask();
 
-
-//    public abstract boolean isFree();
     public boolean isFree(){
-//        System.out.println(task);
         return task == null;
     }
-
-//    public abstract List<String> getRobotLog();
-//    public List<String> getRobotLog() {
-//        return robotLog;
-//    }
 }
