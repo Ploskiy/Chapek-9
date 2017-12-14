@@ -1,14 +1,8 @@
 package by.ploskiy.entitys;
 
-import by.ploskiy.services.TaskController;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.Random;
 
 public class WarriorRobot extends BaseRobot {
-
-    @Autowired
-    private TaskController taskController;
 
     private StringBuilder tmpStringBuilder = new StringBuilder();
 
@@ -19,25 +13,22 @@ public class WarriorRobot extends BaseRobot {
                     + " 3 - 2 - 1 " + "\n"
                     + "Самоуничтожение... " + '\u2737');
 
-//            taskController.removeRobotInList(getName());
-//            getTaskController().removeRobotInList(getName());
-
-            System.out.println("====>>> " + taskController.getRobotList());
-
+            robotDestructor(getName());
 
         } else if (getTask().getType().equals(TaskTypeEnum.KILL_ALL_HUMANS.toString())) {
             robotLogClearAll();
-            tmpStringBuilder.append(getName() + " получил задание: " + getTask().getTitle() + ".\n"
-                    + "Ломать! Крушить! От меня не спрятаться жалким людишкам!" + "\n"
-                    + "OK Google!, найди мне человеков!" + "\n");
+            String result = killHuman();
 
-
-//            if(getTaskController().findHuman()) {
-//                tmpStringBuilder.append("Челавеки ликвидированы!");
-//
-//            } else {
-//                tmpStringBuilder.append("Челавеки не обнаружены!");
-//            }
+            if(result != null) {
+                tmpStringBuilder.append(getName() + " получил задание: " + getTask().getTitle() + ".\n"
+                        + "OK Google!, найди мне человеков!" + "\n"
+                        + "Человек " + result + " найден" + "\n"
+                        + "Задание выполнено... Человеки изгнаны навсегда ...");
+            } else {
+                tmpStringBuilder.append(getName() + " получил задание: " + getTask().getTitle() + ".\n"
+                        + "По нашим данным человеки любят прятаться под одеялом!" + "\n"
+                        + "Задание провалено... ");
+            }
 
             addRobotLogString(tmpStringBuilder.toString());
             tmpStringBuilder.setLength(0);

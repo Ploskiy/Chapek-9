@@ -23,7 +23,7 @@ public class ManInRobotCostume extends BaseRobot {
             addRobotLogString(tmpStringBuilder.toString());
             tmpStringBuilder.setLength(0);
 
-            getTaskController().removeRobotInList(getName());
+            robotDestructor(getName());
 
         } else {
             robotLogClearAll();

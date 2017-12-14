@@ -9,12 +9,15 @@ public class SimpleRobot extends BaseRobot {
                     + " 3 - 2 - 1 " + "\n"
                     + "Самоуничтожение... " + '\u2737');
 
+            robotDestructor(getName());
+
         } else if (getTask().getType().equals(TaskTypeEnum.KILL_ALL_HUMANS.toString())) {
             robotLogClearAll();
             addRobotLogString(getName() + " получил задание: " + getTask().getTitle() + ".\n"
                     + "Ура! Охота на человеков! Нужно найти свой карманный факел." + "\n"
                     + "Поиск человеков..." + "\n"
                     + "Простой робот провалил задание");
+
         } else {
             robotLogClearAll();
             addRobotLogString(getName() + " получил задание: " + getTask().getTitle() + ".\n"

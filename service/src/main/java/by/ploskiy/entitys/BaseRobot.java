@@ -1,5 +1,6 @@
 package by.ploskiy.entitys;
 
+import by.ploskiy.services.LogController;
 import by.ploskiy.services.TaskController;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,20 +17,24 @@ import java.util.List;
 @ToString
 public abstract class BaseRobot implements Runnable {
 
-    @Getter
-    @Setter
-    @Autowired
-    private TaskController taskController;
+//    @Autowired
+//    TaskController taskController;
+
+    private TaskController taskController = new TaskController();
+
+    public void robotDestructor(String name) {
+        taskController.removeRobotInList(name);
+    }
+
+    public String killHuman() {
+        return taskController.findHuman();
+    }
 
     @Getter
     private List<String> robotLog = new ArrayList<String>();
 
     public void addRobotLogString(String string) {
         robotLog.add(string);
-    }
-
-    public void robotLogRemoveLastString() {
-        robotLog.remove(robotLog.size() - 1);
     }
 
     public void robotLogClearAll() {
@@ -49,14 +54,13 @@ public abstract class BaseRobot implements Runnable {
     public void run() {
         if (getTask() != null){
             doTask();
-            System.out.println(getRobotLog());
             setTask(null);
         }
     }
 
-    public abstract void doTask();
-
     public boolean isFree(){
         return task == null;
     }
+
+    public abstract void doTask();
 }

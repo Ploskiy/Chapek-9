@@ -5,6 +5,7 @@ import by.ploskiy.entitys.ManInRobotCostume;
 import by.ploskiy.entitys.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Component
+@Service
 public class TaskController {
 
     @Autowired
@@ -26,15 +27,16 @@ public class TaskController {
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
 
-    public boolean findHuman() {
+    public String findHuman() {
         for (BaseRobot aRobotsList : robotsList) {
             if(aRobotsList.getClass() == ManInRobotCostume.class) {
-                robotsList.remove(aRobotsList);
-                return true;
+                String name = aRobotsList.getName();
+                removeRobotInList(name);
+                return name;
             }
         }
 
-        return false;
+        return null;
     }
 
     public synchronized void addTask(Task task){
@@ -91,16 +93,9 @@ public class TaskController {
     }
 
     public void removeRobotInList(String robotName) {
-
-        System.out.println(robotName + "<==========================================");
-
         for (int i = 0; i < robotsList.size() - 1; i++) {
             if(robotsList.get(i).getName().equals(robotName)) {
-                System.out.println("-=1=- " + robotsList.get(i).getName() + " - " + robotName);
-
                 robotsList.remove(i);
-
-                System.out.println("-=2=- " + robotsList.get(i).getName() + " - " + robotName);
             }
         }
     }

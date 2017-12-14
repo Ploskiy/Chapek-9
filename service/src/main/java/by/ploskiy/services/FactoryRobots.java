@@ -32,7 +32,6 @@ public class FactoryRobots {
             default: robot = new SimpleRobot();
         }
 
-//        BaseRobot robot = new SimpleRobot();
         robot.setName(robot.getClass().getSimpleName() + count++);
         return robot;
     }
