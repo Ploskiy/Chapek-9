@@ -4,6 +4,7 @@ import by.ploskiy.entitys.BaseRobot;
 import by.ploskiy.entitys.ManInRobotCostume;
 import by.ploskiy.entitys.Task;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Service
+@Component
 public class TaskController {
 
     @Autowired
@@ -53,20 +54,19 @@ public class TaskController {
         robotsList.add(factoryRobots.getRobot());
     }
 
-    public synchronized List<Task> showTaskList() {
-        int count = 0;
 
-        if(taskLinkedList.size() > 0 && count % 3 == 0) {
+    public synchronized List<Task> showTaskList() {
+        if(taskLinkedList.size() > 0) {
             taskControllerHub();
         }
-
-        count++;
         return taskLinkedList;
     }
 
     private void taskControllerHub() {
-        if (taskLinkedList.size() > (robotsList.size() / 2)){
+        if ((taskLinkedList.size() > (robotsList.size() / 2)) && (robotsList.size() < 6)){
             robotCreator();
+        } else {
+            logController.addStringToLog("Роботов слишком много.");
         }
 
         for (BaseRobot aRobotsList : robotsList) {
@@ -87,7 +87,7 @@ public class TaskController {
             }
 
             logController.addListToLog(aRobotsList.getRobotLog());
-            logController.addStringToLog("¯\\_(ツ)_/¯ ¯\\_(ツ)_/¯ ¯\\_(ツ)_/¯");
+            logController.addStringToLog("~~~~~~~~~~~~~~~~~");
         }
     }
 
