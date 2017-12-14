@@ -26,7 +26,7 @@ function controllerRobotsList() {
         var robotTable = "<table class=\"table table-striped\">" + "\n" + "<tbody>";
 
         for (var i = 0; i < response.length; i++){
-            var typeRobot = response[i].name.replace(/[0-9]/, "");
+            var typeRobot = response[i].name.replace(/[0-9]+/, "");
             var task = response[i].task == null ? "-" : response[i].task.title;
 
             robotTable +=  "<tr>" + "\n";

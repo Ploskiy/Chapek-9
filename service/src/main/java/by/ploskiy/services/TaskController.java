@@ -94,7 +94,7 @@ public class TaskController {
     }
 
     public void removeRobotInList(String robotName) {
-        for (int i = 0; i < robotsList.size() - 1; i++) {
+        for (int i = 0; i < robotsList.size(); i++) {
             if(robotsList.get(i).getName().equals(robotName)) {
                 robotsList.remove(i);
             }
