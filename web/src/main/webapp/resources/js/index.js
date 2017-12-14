@@ -87,6 +87,12 @@ function addTaskToController(data) {
     })
 }
 
+function addRobot() {
+    $.ajax("/addRobot", {
+        method: "POST"
+    })
+}
+
 function buttonsGroupsComandsForRobots() {
     $.ajax("/allComandsForRobots", {
         method: "GET"

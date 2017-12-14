@@ -22,9 +22,6 @@ public class IndexRestController {
     @Autowired
     private final LogController logController;
 
-//    private Task task;
-
-
     public IndexRestController(TaskController taskController, LogController logController){
         this.taskController = taskController;
         this.logController = logController;
@@ -56,5 +53,10 @@ public class IndexRestController {
     @GetMapping("/allRobots")
     public List<BaseRobot> allRobots() {
         return taskController.getRobotList();
+    }
+
+    @PostMapping("/addRobot")
+    public void addRobot(){
+        taskController.createRobot();
     }
 }

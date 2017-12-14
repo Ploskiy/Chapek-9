@@ -4,7 +4,6 @@ import by.ploskiy.entitys.BaseRobot;
 import by.ploskiy.entitys.ManInRobotCostume;
 import by.ploskiy.entitys.Task;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -51,10 +50,14 @@ public class TaskController {
         return tmpTask;
     }
 
-    private void robotCreator() {
-        robotsList.add(factoryRobots.getRobot());
-    }
+    public void createRobot() {
+        if (robotsList.size() < 6){
+            robotsList.add(factoryRobots.getRobot());
+        } else {
+            logController.addStringToLog("Роботов слишком много.");
+        }
 
+    }
 
     public synchronized List<Task> showTaskList() {
         if(taskLinkedList.size() > 0) {
@@ -64,10 +67,8 @@ public class TaskController {
     }
 
     private void taskControllerHub() {
-        if ((taskLinkedList.size() > (robotsList.size() / 2)) && (robotsList.size() < 6)){
-            robotCreator();
-        } else {
-            logController.addStringToLog("Роботов слишком много.");
+        if (taskLinkedList.size() > (robotsList.size() / 2)){
+            createRobot();
         }
 
         for (BaseRobot aRobotsList : robotsList) {
