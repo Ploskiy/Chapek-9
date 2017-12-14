@@ -5,7 +5,6 @@ import by.ploskiy.entitys.ManInRobotCostume;
 import by.ploskiy.entitys.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

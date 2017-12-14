@@ -2,9 +2,7 @@ package by.ploskiy.entitys;
 
 import by.ploskiy.services.TaskController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Random;
 
 public class WarriorRobot extends BaseRobot {

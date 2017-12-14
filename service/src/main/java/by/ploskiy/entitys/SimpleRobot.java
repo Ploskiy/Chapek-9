@@ -1,8 +1,5 @@
 package by.ploskiy.entitys;
 
-import by.ploskiy.services.TaskController;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class SimpleRobot extends BaseRobot {
 
     public void doTask() {

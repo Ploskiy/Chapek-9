@@ -1,9 +1,5 @@
 package by.ploskiy.entitys;
 
-import by.ploskiy.services.TaskController;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class ManInRobotCostume extends BaseRobot {
