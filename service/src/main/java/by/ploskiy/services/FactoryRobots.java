@@ -14,7 +14,6 @@ public class FactoryRobots {
     private long count = 0;
 
     public BaseRobot getRobot(){
-
         BaseRobot robot;
 
         switch (new Random().nextInt(5)) {

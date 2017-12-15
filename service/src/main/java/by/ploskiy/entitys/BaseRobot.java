@@ -15,9 +15,6 @@ import java.util.List;
 @ToString
 public abstract class BaseRobot implements Runnable {
 
-//    @Autowired
-//    TaskController taskController;
-
     private TaskController taskController = new TaskController();
 
     public void robotDestructor(String name) {

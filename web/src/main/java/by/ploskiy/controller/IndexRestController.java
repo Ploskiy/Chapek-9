@@ -69,11 +69,6 @@ public class IndexRestController {
         return TaskTypeEnum.values();
     }
 
-//    @GetMapping("/allComandsForRobotsList")
-//    public List<TaskTypeEnum> allComandsForRobotsList() {
-//        return new ArrayList<TaskTypeEnum>(Arrays.asList(TaskTypeEnum.values()));
-//    }
-
     @GetMapping("/allRobots")
     public List<BaseRobot> allRobots() {
         return taskController.getRobotList();
