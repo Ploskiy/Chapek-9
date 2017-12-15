@@ -24,8 +24,6 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration(classes = TestConfigServices.class)
 public class Tests {
 
-//    private final Task task;
-
     @Autowired
     private FactoryRobots factoryRobots;
 

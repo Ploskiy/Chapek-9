@@ -24,8 +24,6 @@ public class ThymeleafConfig {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
-//        templateEngine.addDialect(new Java8TimeDialect());
-//        templateEngine.setAdditionalDialects(additDial());
 
         return templateEngine;
     }

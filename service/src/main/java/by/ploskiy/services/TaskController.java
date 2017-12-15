@@ -89,7 +89,6 @@ public class TaskController {
             }
 
             logController.addListToLog(aRobotsList.getRobotLog());
-            logController.addStringToLog("~~~~~~~~~~~~~~~~~");
         }
     }
 
@@ -97,6 +96,8 @@ public class TaskController {
         for (BaseRobot aRobotsList : robotsList) {
             if (aRobotsList.getName().equals(robotName)) {
                 aRobotsList.setTask(task);
+
+                logController.addStringToLog("=> Персональная задача для робота: " + aRobotsList.getName() + " : " + task.getTitle());
 
                 try {
                     executorService.submit(aRobotsList);
@@ -106,7 +107,6 @@ public class TaskController {
             }
 
             logController.addListToLog(aRobotsList.getRobotLog());
-            logController.addStringToLog("~~~~~~~~~~~~~~~~~");
         }
     }
 
