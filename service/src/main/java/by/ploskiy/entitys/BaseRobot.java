@@ -1,12 +1,10 @@
 package by.ploskiy.entitys;
 
-import by.ploskiy.services.LogController;
 import by.ploskiy.services.TaskController;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

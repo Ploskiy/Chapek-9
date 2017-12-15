@@ -1,5 +1,12 @@
 package by.ploskiy.entitys;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
+
 public enum TaskTypeEnum {
 
     KILL_ALL_HUMANS {

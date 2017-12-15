@@ -93,6 +93,23 @@ public class TaskController {
         }
     }
 
+    public void personalRobotTasr(Task task, String robotName) {
+        for (BaseRobot aRobotsList : robotsList) {
+            if (aRobotsList.getName().equals(robotName)) {
+                aRobotsList.setTask(task);
+
+                try {
+                    executorService.submit(aRobotsList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            logController.addListToLog(aRobotsList.getRobotLog());
+            logController.addStringToLog("~~~~~~~~~~~~~~~~~");
+        }
+    }
+
     public void removeRobotInList(String robotName) {
         for (int i = 0; i < robotsList.size(); i++) {
             if(robotsList.get(i).getName().equals(robotName)) {
