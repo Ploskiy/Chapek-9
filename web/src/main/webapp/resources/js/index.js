@@ -47,8 +47,6 @@ function addTaskToController(data) {
 }
 
 function addTaskToRobot(dataB , dataR) {
-    var dataButton = [dataB, dataR];
-
     $.ajax("/addTaskToRobot", {
         method: "POST",
         contextType: "application/json",
@@ -101,7 +99,7 @@ function controllerRobotsList() {
         roboDiv.innerHTML = robotTable;
 
         var roboCountDiv = document.querySelector('#robotCount');
-        roboCountDiv.innerHTML = "Robots: " + response.length;
+        roboCountDiv.innerHTML = "Robots (6 max): " + response.length;
     });
 
     setTimeout(controllerRobotsList, 5000);
