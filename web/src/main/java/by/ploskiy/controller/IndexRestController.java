@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,6 +65,16 @@ public class IndexRestController {
     @GetMapping("/allComandsForRobots")
     public TaskTypeEnum[] allComandsForRobots() {
         return TaskTypeEnum.values();
+    }
+
+    @GetMapping("/allTaskDescription")
+    public Map<String, String> allTaskDescription() {
+        Map<String, String> allTasksEnumMap = new HashMap<String, String>();
+        for (TaskTypeEnum taskEnum: TaskTypeEnum.values()) {
+            allTasksEnumMap.put(taskEnum.toString(), taskEnum.getDescription());
+        }
+
+        return allTasksEnumMap;
     }
 
     @GetMapping("/allRobots")

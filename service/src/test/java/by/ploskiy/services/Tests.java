@@ -4,6 +4,7 @@ import by.ploskiy.config.TestConfigServices;
 import by.ploskiy.entitys.BaseRobot;
 import by.ploskiy.entitys.SimpleRobot;
 import by.ploskiy.entitys.Task;
+import by.ploskiy.entitys.TaskTypeEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -89,5 +87,16 @@ public class Tests {
         System.out.println(robotsList.get(0).getRobotLog().size());
 
         assertEquals(robotsList.get(0).getRobotLog().size(), 1);
+    }
+
+    @Test
+    public void testEnumToMap() {
+        Map<String, String> allTasksEnumMap = new HashMap<String, String>();
+        for (TaskTypeEnum taskEnum: TaskTypeEnum.values()) {
+            allTasksEnumMap.put(taskEnum.toString(), taskEnum.getDescription());
+        }
+
+        System.out.println(allTasksEnumMap);
+
     }
 }

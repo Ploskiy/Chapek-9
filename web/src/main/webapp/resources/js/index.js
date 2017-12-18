@@ -46,11 +46,11 @@ function addTaskToController(data) {
     })
 }
 
-function addTaskToRobot(dataB , dataR) {
+function addTaskToRobot(dataButton , dataRobot) {
     $.ajax("/addTaskToRobot", {
         method: "POST",
         contextType: "application/json",
-        data: {task: dataB, name: dataR}
+        data: {task: dataButton, name: dataRobot}
     })
 }
 
@@ -61,6 +61,15 @@ function addRobot() {
 }
 
 var taskButtons = [];
+var taskDescription = [];
+
+function getTaskDescription() {
+    $.ajax("/allTaskDescription", {
+        method: "GET"
+    }).done(function (response) {
+        taskDescription = response;
+    })
+}
 
 function controllerRobotsList() {
     $.ajax("/allRobots", {
@@ -72,10 +81,12 @@ function controllerRobotsList() {
         for (var i = 0; i < response.length; i++){
             var buttonsGroupsForRobot = "" + "\n";
             for (var n = 0; n < taskButtons.length; n++){
-                buttonsGroupsForRobot += "<button type=\"button\" class=\"btn btn-primary btn-xs\" onclick='addTaskToRobot(\"" + taskButtons[n] + "\", \"" + response[i].name + "\")'>" + taskButtons[n] + "</button>" + "\n";
+                buttonsGroupsForRobot += "<button type=\"button\" class=\"btn btn-primary btn-xs\" onclick='addTaskToRobot(\"" + taskButtons[n]
+                    + "\", \"" + response[i].name + "\")'>" + taskDescription[taskButtons[n]] + "</button>" + "\n";
             }
             buttonsGroupsForRobot += "\n";
 
+            console.log(buttonsGroupsForRobot);
 
             var typeRobot = response[i].name.replace(/[0-9]+/, "");
             var task = response[i].task == null ? "-" : response[i].task.title;
@@ -110,11 +121,12 @@ function buttonsGroupsComandsForRobots() {
         method: "GET"
     }).done(function (response) {
         taskButtons = response;
+
         var buttonsGroups = "" + "\n";
 
         for (var i = 0; i < taskButtons.length; i++){
             buttonsGroups +=  "<button type=\"button\" class=\"btn btn-primary\" onclick='addTaskToController(\""
-                + taskButtons[i] + "\")'>"  + taskButtons[i] + "</button>" + "\n";
+                + taskButtons[i] + "\")'>"  + taskDescription[taskButtons[i]] + "</button>" + "\n";
         }
         buttonsGroups += "\n";
 
