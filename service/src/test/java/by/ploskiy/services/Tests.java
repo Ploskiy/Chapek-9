@@ -88,15 +88,4 @@ public class Tests {
 
         assertEquals(robotsList.get(0).getRobotLog().size(), 1);
     }
-
-    @Test
-    public void testEnumToMap() {
-        Map<String, String> allTasksEnumMap = new HashMap<String, String>();
-        for (TaskTypeEnum taskEnum: TaskTypeEnum.values()) {
-            allTasksEnumMap.put(taskEnum.toString(), taskEnum.getDescription());
-        }
-
-        System.out.println(allTasksEnumMap);
-
-    }
 }
