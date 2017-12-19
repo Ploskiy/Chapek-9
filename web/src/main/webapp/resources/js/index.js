@@ -69,6 +69,8 @@ function getTaskDescription() {
     }).done(function (response) {
         taskDescription = response;
     })
+
+    buttonsGroupsComandsForRobots()
 }
 
 function controllerRobotsList() {
