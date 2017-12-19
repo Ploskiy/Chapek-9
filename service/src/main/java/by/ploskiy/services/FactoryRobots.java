@@ -32,6 +32,7 @@ public class FactoryRobots {
         }
 
         robot.setName(robot.getClass().getSimpleName() + count++);
+        robot.addRobotLogString("Power ON!");
         return robot;
     }
 }
