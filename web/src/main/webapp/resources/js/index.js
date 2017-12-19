@@ -72,7 +72,10 @@ function getPanelOfButtons() {
         taskDescription = response;
     });
 
-    setTimeout(createButtonsGroupsComandsForRobots(), 1000);
+    setTimeout(function () {
+        console.log(taskDescription);
+        createButtonsGroupsComandsForRobots();
+    }, 500);
 }
 
 function controllerRobotsList() {
@@ -125,7 +128,6 @@ function createButtonsGroupsComandsForRobots() {
         taskButtons = response;
 
         var buttonsGroups = "" + "\n";
-
         for (var i = 0; i < taskButtons.length; i++) {
             buttonsGroups += "<button type=\"button\" class=\"btn btn-primary\" onclick='addTaskToController(\""
                 + taskButtons[i] + "\")'>" + taskDescription[taskButtons[i]] + "</button>" + "\n";
