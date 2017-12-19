@@ -1,3 +1,5 @@
+getTaskDescription();
+
 function controllerTaskList() {
     $.ajax("/controllerTaskList", {
         method: "GET"
@@ -69,8 +71,6 @@ function getTaskDescription() {
     }).done(function (response) {
         taskDescription = response;
     })
-
-    buttonsGroupsComandsForRobots()
 }
 
 function controllerRobotsList() {
@@ -87,8 +87,6 @@ function controllerRobotsList() {
                     + "\", \"" + response[i].name + "\")'>" + taskDescription[taskButtons[n]] + "</button>" + "\n";
             }
             buttonsGroupsForRobot += "\n";
-
-            console.log(buttonsGroupsForRobot);
 
             var typeRobot = response[i].name.replace(/[0-9]+/, "");
             var task = response[i].task == null ? "-" : response[i].task.title;
