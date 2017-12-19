@@ -53,6 +53,7 @@ public class TaskController {
     public void createRobot() {
         if (robotsList.size() < 6){
             robotsList.add(factoryRobots.getRobot());
+            logController.addStringToLog("Робот добавлен.");
         } else {
             logController.addStringToLog("Роботов слишком много.");
         }
