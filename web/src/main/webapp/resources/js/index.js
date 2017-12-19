@@ -1,4 +1,4 @@
-getTaskDescription();
+getPanelOfButtons();
 
 function controllerTaskList() {
     $.ajax("/controllerTaskList", {
@@ -65,12 +65,14 @@ function addRobot() {
 var taskButtons = [];
 var taskDescription = [];
 
-function getTaskDescription() {
+function getPanelOfButtons() {
     $.ajax("/allTaskDescription", {
         method: "GET"
     }).done(function (response) {
         taskDescription = response;
-    })
+    });
+
+    createButtonsGroupsComandsForRobots();
 }
 
 function controllerRobotsList() {
@@ -116,7 +118,7 @@ function controllerRobotsList() {
     setTimeout(controllerRobotsList, 5000);
 }
 
-function buttonsGroupsComandsForRobots() {
+function createButtonsGroupsComandsForRobots() {
     $.ajax("/allComandsForRobots", {
         method: "GET"
     }).done(function (response) {
@@ -124,9 +126,9 @@ function buttonsGroupsComandsForRobots() {
 
         var buttonsGroups = "" + "\n";
 
-        for (var i = 0; i < taskButtons.length; i++){
-            buttonsGroups +=  "<button type=\"button\" class=\"btn btn-primary\" onclick='addTaskToController(\""
-                + taskButtons[i] + "\")'>"  + taskDescription[taskButtons[i]] + "</button>" + "\n";
+        for (var i = 0; i < taskButtons.length; i++) {
+            buttonsGroups += "<button type=\"button\" class=\"btn btn-primary\" onclick='addTaskToController(\""
+                + taskButtons[i] + "\")'>" + taskDescription[taskButtons[i]] + "</button>" + "\n";
         }
         buttonsGroups += "\n";
 
