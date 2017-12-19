@@ -72,7 +72,7 @@ function getPanelOfButtons() {
         taskDescription = response;
     });
 
-    createButtonsGroupsComandsForRobots();
+    setTimeout(createButtonsGroupsComandsForRobots(), 1000);
 }
 
 function controllerRobotsList() {
