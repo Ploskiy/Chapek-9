@@ -2,6 +2,7 @@ package by.ploskiy.entitys;
 
 public class SimpleRobot extends BaseRobot {
 
+    @Override
     public void doTask() {
         if(getTask().getType().equals(TaskTypeEnum.SELF_DESTRUCTION.toString())) {
             robotLogClearAll();
