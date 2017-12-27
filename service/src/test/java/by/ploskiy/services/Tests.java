@@ -13,10 +13,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestConfigServices.class)
@@ -30,7 +31,7 @@ public class Tests {
 
 
     @Test
-    public void RobotsFactoryTest() {
+    public void robotsFactoryTest() {
         BaseRobot robot = factoryRobots.getRobot();
         BaseRobot robot1 = factoryRobots.getRobot();
 
@@ -39,36 +40,39 @@ public class Tests {
 
     @Test
     public void threadRobotsTest() {
-        BaseRobot robot = factoryRobots.getRobot();
-        BaseRobot robot1 = factoryRobots.getRobot();
-        SimpleRobot simpleRobot = new SimpleRobot();
-        SimpleRobot simpleRobot2 = new SimpleRobot();
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        final BaseRobot robot = factoryRobots.getRobot();
+        final BaseRobot robot1 = factoryRobots.getRobot();
 
         Task task1 = new Task("111", "222");
         Task task2 = new Task("333", "444");
 
-        simpleRobot.setTask(task1);
-        simpleRobot2.setTask(task2);
+        Future<Boolean> taskForRobot = executorService.submit(new Callable<Boolean>() {
+            public Boolean call() throws Exception {
+                return robot.isFree();
+            }
+        });
 
-        List<SimpleRobot> robotsList = new ArrayList<SimpleRobot>();
-        robotsList.add(simpleRobot);
-        robotsList.add(simpleRobot2);
+        Future<Boolean> taskForRobot1 = executorService.submit(new Callable<Boolean>() {
+            public Boolean call() throws Exception {
+                return robot1.isFree();
+            }
+        });
 
-        Thread t1 = new Thread(robotsList.get(0), "robo1");
-        Thread t2 = new Thread(robotsList.get(1), "robo2");
 
-        t1.start();
-        t2.start();
+        try {
+            assertTrue(taskForRobot.get() && taskForRobot1.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
-        Thread t3 = new Thread(robotsList.get(0), "robo1");
-        t3.start();
-
-        System.out.println("Поток отработал");
     }
 
     @Test
-    public void testRobotsTaskLog() {
-        List<BaseRobot> robotsList = new ArrayList<BaseRobot>();
+    public void robotsLogTest() {
+        final List<BaseRobot> robotsList = new ArrayList<BaseRobot>();
         robotsList.add(factoryRobots.getRobot());
         robotsList.add(factoryRobots.getRobot());
 
@@ -83,9 +87,25 @@ public class Tests {
         executorService.submit(robotsList.get(0));
         executorService.submit(robotsList.get(1));
 
+        Future<List<String>> logListAfterTaskForRobot = executorService.submit(new Callable<List<String>>() {
+            public List<String> call() throws Exception {
+                return robotsList.get(0).getRobotLog();
+            }
+        });
 
-        System.out.println(robotsList.get(0).getRobotLog().size());
+        Future<List<String>> logListAfterTaskForRobot1 = executorService.submit(new Callable<List<String>>() {
+            public List<String> call() throws Exception {
+                return robotsList.get(1).getRobotLog();
+            }
+        });
 
-        assertEquals(robotsList.get(0).getRobotLog().size(), 1);
+
+        try {
+            assertTrue((logListAfterTaskForRobot.get().size() > 0) && (logListAfterTaskForRobot1.get().size() > 0));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 }
