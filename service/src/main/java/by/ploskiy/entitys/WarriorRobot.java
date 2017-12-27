@@ -6,6 +6,7 @@ public class WarriorRobot extends BaseRobot {
 
     private StringBuilder tmpStringBuilder = new StringBuilder();
 
+    @Override
     public void doTask() {
         if(getTask().getType().equals(TaskTypeEnum.SELF_DESTRUCTION.toString())) {
             robotLogClearAll();
