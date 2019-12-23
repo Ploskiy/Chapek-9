@@ -6,6 +6,4 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = {"by.ploskiy.entitys", "by.ploskiy.services"})
 public class ConfigService {
-
-
 }

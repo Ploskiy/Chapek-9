@@ -8,14 +8,14 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {ConfigService.class};
+        return new Class[]{ConfigService.class};
     }
 
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {ConfigWeb.class};
+        return new Class[]{ConfigWeb.class};
     }
 
     protected String[] getServletMappings() {
-        return new String[] {"/"};
+        return new String[]{"/"};
     }
 }

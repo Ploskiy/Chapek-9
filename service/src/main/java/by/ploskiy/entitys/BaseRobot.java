@@ -33,7 +33,7 @@ public abstract class BaseRobot implements Runnable {
     }
 
     public void robotLogClearAll() {
-        while (robotLog.size() > 0){
+        while (robotLog.size() > 0) {
             robotLog.remove(0);
         }
     }
@@ -47,13 +47,13 @@ public abstract class BaseRobot implements Runnable {
     private Task task = null;
 
     public void run() {
-        if (getTask() != null){
+        if (getTask() != null) {
             doTask();
             setTask(null);
         }
     }
 
-    public boolean isFree(){
+    public boolean isFree() {
         return task == null;
     }
 

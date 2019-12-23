@@ -26,23 +26,23 @@ public class IndexRestController {
     @Autowired
     private final LogController logController;
 
-    public IndexRestController(TaskController taskController, LogController logController){
+    public IndexRestController(TaskController taskController, LogController logController) {
         this.taskController = taskController;
         this.logController = logController;
     }
 
     @GetMapping("/controllerTaskList")
-    public List<Task> controllerTaskList(){
+    public List<Task> controllerTaskList() {
         return taskController.showTaskList();
     }
 
     @GetMapping("/controllerLogList")
-    public List<String> controllerLogList(){
+    public List<String> controllerLogList() {
         return logController.getAllLogList();
     }
 
     @PostMapping("/addTaskToController")
-    public void addTask(@RequestBody String dataButton){
+    public void addTask(@RequestBody String dataButton) {
         Task task = new Task();
         task.setTitle(TaskTypeEnum.valueOf(dataButton.replaceAll("=", "")).getDescription());
         task.setType(dataButton.replaceAll("=", ""));
@@ -50,7 +50,7 @@ public class IndexRestController {
     }
 
     @PostMapping("/addTaskToRobot")
-    public void addTaskToRobot(@RequestBody String dataButton){
+    public void addTaskToRobot(@RequestBody String dataButton) {
         Pattern regEx = Pattern.compile("(task=)(\\D+)&(name=)(\\D+\\d+)");
 
         Matcher matcher = regEx.matcher(dataButton);
@@ -71,7 +71,7 @@ public class IndexRestController {
     @GetMapping("/allTaskDescription")
     public Map<String, String> allTaskDescription() {
         Map<String, String> allTasksEnumMap = new HashMap<String, String>();
-        for (TaskTypeEnum taskEnum: TaskTypeEnum.values()) {
+        for (TaskTypeEnum taskEnum : TaskTypeEnum.values()) {
             allTasksEnumMap.put(taskEnum.toString(), taskEnum.getDescription());
         }
 
@@ -84,7 +84,7 @@ public class IndexRestController {
     }
 
     @PostMapping("/addRobot")
-    public void addRobot(){
+    public void addRobot() {
         taskController.createRobot();
     }
 }

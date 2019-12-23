@@ -10,16 +10,16 @@ public class LogController {
 
     private static List<String> log = new LinkedList<String>();
 
-    public synchronized void addStringToLog(String event){
+    public synchronized void addStringToLog(String event) {
         log.add(event);
     }
 
-    public synchronized void addListToLog(List<String> eventsList){
+    public synchronized void addListToLog(List<String> eventsList) {
         log.addAll(eventsList);
     }
 
     public synchronized List<String> getAllLogList() {
-        while (log.size() > 10){
+        while (log.size() > 10) {
             log.remove(0);
         }
 

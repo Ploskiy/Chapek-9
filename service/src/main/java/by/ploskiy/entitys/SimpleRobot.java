@@ -4,7 +4,7 @@ public class SimpleRobot extends BaseRobot {
 
     @Override
     public void doTask() {
-        if(getTask().getType().equals(TaskTypeEnum.SELF_DESTRUCTION.toString())) {
+        if (getTask().getType().equals(TaskTypeEnum.SELF_DESTRUCTION.toString())) {
             robotLogClearAll();
             addRobotLogString(getName() + " получил задание: " + getTask().getTitle() + ".\n"
                     + " 3 - 2 - 1 " + "\n"
